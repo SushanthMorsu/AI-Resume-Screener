@@ -149,27 +149,3 @@ Once you run the pipeline with `LANGCHAIN_TRACING_V2=true`:
 | Rubric in scoring prompt | Forces consistent, mathematical scoring |
 | Separate extraction vs. matching | Modular — easy to swap or debug each step |
 
----
-
-## ✅ Assignment Checklist
-
-- [x] 3 resumes (Strong / Average / Weak)
-- [x] 1 Job Description (Data Scientist role)
-- [x] Step 1: Skill Extraction (skills, experience, tools)
-- [x] Step 2: Matching Logic
-- [x] Step 3: Scoring (0–100 with breakdown)
-- [x] Step 4: Explanation (why the score was assigned)
-- [x] LangChain: `PromptTemplate` + `LCEL` + `.invoke()`
-- [x] Modular structure: `prompts/` + `chains/` + `main.py`
-- [x] LangSmith: `LANGCHAIN_TRACING_V2=true`
-- [x] At least 3 traced runs
-- [x] Debug run (incorrect output shown + analyzed)
-- [x] No hardcoded outputs
-- [x] No hallucinated assumptions
-- [x] Bonus: Structured JSON output
-- [x] Bonus: LangSmith tags
-
----
-
-## 📄 License
-MIT — free to use for educational purposes.
