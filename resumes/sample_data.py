@@ -151,9 +151,30 @@ Experience: 2+ years in a data science or related role
 Education: B.Tech / M.Tech / M.S. in CS, Statistics, or related field
 """
 
+DEBUG_RESUME = """
+Name: Unknown Candidate
+
+SUMMARY
+asdfghjkl random text no clear formatting
+
+SKILLS
+??? ### Python maybe
+
+EXPERIENCE
+Worked somewhere maybe 2 years maybe not sure
+
+EDUCATION
+N/A
+
+PROJECTS
+none
+"""
+
 # Dictionary of all candidates for iteration
 CANDIDATES = {
     "Strong Candidate – Priya Sharma": STRONG_RESUME,
     "Average Candidate – Rahul Verma": AVERAGE_RESUME,
     "Weak Candidate – Amit Gupta": WEAK_RESUME,
+    "Debug Candidate – Unknown": DEBUG_RESUME,
 }
+    
