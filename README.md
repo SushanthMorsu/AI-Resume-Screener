@@ -7,145 +7,143 @@
 
 ## 📋 Overview
 
-An end-to-end AI-powered resume screening pipeline that:
-- Extracts skills, tools, and experience from resumes
-- Matches candidates against a job description
-- Assigns a transparent 0–100 fit score using a rubric
-- Generates explainable AI output for hiring managers
-- Traces every pipeline step via **LangSmith**
+An end-to-end AI-powered Resume Screening System that helps recruiters evaluate candidates automatically using Generative AI.
+
+This project:
+
+- Extracts candidate skills, tools, education, and experience
+- Matches resumes against a Job Description
+- Calculates a transparent **Fit Score (0–100)**
+- Generates explainable hiring recommendations
+- Uses **LangSmith tracing** for monitoring and debugging
+- Handles malformed / low-quality resume inputs gracefully
+
+---
+
+## 🎯 Objective
+
+Build a production-style AI recruitment assistant using LangChain that screens resumes intelligently.
+
+### Input
+
+- Resume Text
+- Job Description
+
+### Output
+
+- Candidate Skill Extraction
+- Job Match Analysis
+- Fit Score
+- Hiring Recommendation
+- Explainable Summary
 
 ---
 
 ## 🏗️ Project Structure
 
-```
-ai_resume_screener/
+```text
+AI-Resume-Screener/
 │
-├── main.py                    # Entry point — runs all 3 candidates
-├── notebook.ipynb             # Jupyter notebook for interactive exploration
-├── requirements.txt           # Python dependencies
-├── .env.example               # Environment variable template
+├── main.py
+├── notebook.ipynb
+├── requirements.txt
+├── .env.example
+├── README.md
 │
 ├── prompts/
-│   ├── __init__.py
-│   └── templates.py           # All 5 LangChain PromptTemplates
+│   └── templates.py
 │
 ├── chains/
-│   ├── __init__.py
-│   └── screening_chain.py     # LCEL chains + pipeline orchestrator
+│   └── screening_chain.py
 │
-└── resumes/
-    ├── __init__.py
-    └── sample_data.py         # 3 sample resumes + 1 job description
+├── resumes/
+│   └── sample_data.py
+│
+└── screenshots/
+    ├── dashboard.png
+    ├── strong_trace.png
+    ├── prompt_output.png
+    ├── debug_trace.png
+    └── ranking_terminal.png
 ```
 
 ---
 
 ## ⚙️ Pipeline Architecture
 
+```text
+Resume → Extract Skills → Extract JD → Match → Score → Explain → LangSmith Trace
 ```
-Resume Text
-    │
-    ▼
-[Chain 1] Skill Extraction      ← PromptTemplate | LLM | StrOutputParser | JSON
-    │
-    ▼
-[Chain 2] Job Requirements      ← PromptTemplate | LLM | StrOutputParser | JSON
-    │
-    ▼
-[Chain 3] Matching Logic        ← Compare candidate ↔ job requirements
-    │
-    ▼
-[Chain 4] Scoring (0–100)       ← Rubric-based scoring with breakdown
-    │
-    ▼
-[Chain 5] Explanation           ← Explainable AI output for recruiter
-    │
-    ▼
-LangSmith Trace                 ← All steps visible as nested spans
-```
+
+---
+
+## 🧠 Technologies Used
+
+- Python
+- LangChain
+- LCEL (LangChain Expression Language)
+- Groq API
+- LangSmith
+- Pydantic
+- VS Code
 
 ---
 
 ## 🚀 Setup & Run
 
-### 1. Clone & Install
+### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/<your-username>/ai-resume-screener.git
-cd ai-resume-screener
+git clone https://github.com/SushanthMorsu/AI-Resume-Screener.git
+cd AI-Resume-Screener
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 2. Configure Environment
+### 3️⃣ Configure `.env`
 
-```bash
-cp .env.example .env
-# Edit .env and add your keys:
-#   GROQ_API_KEY=gsk_...
-#   GROQ_MODEL=llama-3.1-8b-instant
-#   LANGCHAIN_API_KEY=ls__...
-#   LANGCHAIN_TRACING_V2=true
-#   LANGCHAIN_PROJECT=ai-resume-screener
+```env
+GROQ_API_KEY=your_groq_api_key
+GROQ_MODEL=llama-3.1-8b-instant
+
+LANGCHAIN_API_KEY=your_langsmith_api_key
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_PROJECT=ai-resume-screener
 ```
 
-> **Get LangSmith API key:** https://smith.langchain.com → Settings → API Keys
-
-### 3. Run
+### 4️⃣ Run Project
 
 ```bash
-# Option A: Python script
 python main.py
-
-# Option B: Jupyter Notebook
-jupyter notebook notebook.ipynb
 ```
 
 ---
 
-## 📊 Scoring Rubric
+## 📸 Screenshots
 
-| Category             | Max Points |
-|----------------------|-----------|
-| Required Skills Match | 40       |
-| Experience Match      | 20       |
-| Tools & Frameworks    | 20       |
-| Education             | 10       |
-| Bonus Skills          | 10       |
-| **TOTAL**             | **100**  |
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
 
-| Score Range | Tier            |
-|-------------|-----------------|
-| 80 – 100    | Strong Fit      |
-| 60 – 79     | Moderate Fit    |
-| 40 – 59     | Weak Fit        |
-| 0 – 39      | Not Suitable    |
+### Strong Candidate Trace
+![Strong Candidate Trace](screenshots/strong_trace.png)
 
----
+### Prompt Input + Output
+![Prompt Output](screenshots/prompt_output.png)
 
-## 🔍 LangSmith Tracing
+### Debug Candidate Trace
+![Debug Candidate Trace](screenshots/debug_trace.png)
 
-Once you run the pipeline with `LANGCHAIN_TRACING_V2=true`:
-
-1. Go to https://smith.langchain.com
-2. Open your project (`ai-resume-screener`)
-3. You will see **4 runs** (3 candidates + 1 debug):
-   - `Strong Candidate – Priya Sharma`
-   - `Average Candidate – Rahul Verma`
-   - `Weak Candidate – Amit Gupta`
-   - `DEBUG – Malformed Resume`
-4. Each run shows **5 nested spans** (one per pipeline step)
-5. Click any span to inspect the exact prompt, LLM response, and latency
+### Ranking Summary
+![Ranking Summary](screenshots/ranking_terminal.png)
 
 ---
 
-## 🧠 Prompt Engineering Decisions
+## 👨‍💻 Author
 
-| Decision | Rationale |
-|----------|-----------|
-| `temperature=0.0` | Deterministic scoring — no randomness in rubric application |
-| "Only extract what is present" rule | Prevents hallucination of skills |
-| JSON-only output constraint | Enables reliable parsing downstream |
-| Rubric in scoring prompt | Forces consistent, mathematical scoring |
-| Separate extraction vs. matching | Modular — easy to swap or debug each step |
+**Sushanth Morsu**
 
+GitHub: https://github.com/SushanthMorsu
