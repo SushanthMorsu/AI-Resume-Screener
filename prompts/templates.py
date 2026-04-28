@@ -161,7 +161,11 @@ STRICT RULES:
   1. Reference ONLY information from the score result and matching analysis.
   2. Do NOT invent strengths or weaknesses.
   3. Be concise but specific — use bullet points.
-  4. Include a hiring recommendation.
+  4. Include a hiring recommendation using these rules:
+     - Strong Fit (80-100) = Strongly Recommend
+     - Moderate Fit (60-79) = Consider
+     - Weak Fit (40-59) = Do Not Recommend
+     - Not Suitable (0-39) = Do Not Recommend
   5. Respond ONLY with valid JSON — no markdown, no extra text.
 
 OUTPUT FORMAT (strict JSON):
@@ -171,7 +175,7 @@ OUTPUT FORMAT (strict JSON):
   "tier": "<tier from scoring>",
   "strengths": ["<specific strength 1>", ...],
   "gaps": ["<specific gap 1>", ...],
-  "hiring_recommendation": "<Strongly Recommend | Recommend | Consider | Do Not Recommend>",
+  "hiring_recommendation": "<Strongly Recommend | Consider | Do Not Recommend>",
   "summary": "<3-4 sentence plain-English explanation for the hiring manager>"
 }}
 
