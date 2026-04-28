@@ -1,0 +1,7 @@
+langchain==0.2.16
+langchain-core==0.2.38
+langchain-openai==0.1.23
+langsmith==0.1.117
+python-dotenv==1.0.1
+pydantic==2.8.2
+pip
